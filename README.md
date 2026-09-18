@@ -4,7 +4,7 @@
 
 Kurakani is a research-oriented Retrieval-Augmented Generation (RAG) project. The goal is not simply to build another chatbot, but to create a reproducible platform for studying **when to retrieve, how to retrieve, how to detect weak evidence, how to verify generated answers, and how to measure the quality/efficiency trade-offs of different RAG architectures**.
 
-**Status:** 🟡 Research foundation — implementation and experiments are beginning.
+**Status:** 🟡 Baseline implementation — deterministic chunking and BM25 retrieval are now in place.
 
 ## Research question
 
@@ -101,6 +101,10 @@ The final comparison set will be determined by the corpus, models, and reproduci
 
 The project deliberately separates retrieval evaluation from generation evaluation because a good final answer can hide poor retrieval and a poor answer can result from otherwise good evidence.
 
+## Current implementation
+
+The first reproducible retrieval baseline lives under `src/kurakani/`. It intentionally uses a dependency-light BM25 implementation before introducing model-specific dense retrieval or generation. See `docs/BASELINE.md`.
+
 ## Research documentation
 
 - RESEARCH.md — research question, hypotheses, architecture, and methodology
@@ -160,9 +164,10 @@ Every research branch should leave enough documentation for another researcher t
 - [x] Establish literature map
 
 ### Phase 1 — Baseline RAG
-- [ ] Inspect implementation requirements
-- [ ] Build deterministic ingestion pipeline
-- [ ] Implement chunking
+- [x] Inspect implementation requirements
+- [x] Build deterministic ingestion/chunking foundation
+- [x] Implement deterministic BM25 retrieval baseline
+- [x] Add automated tests
 - [ ] Implement dense retrieval
 - [ ] Implement baseline generation
 - [ ] Add tracing
