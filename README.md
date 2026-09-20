@@ -4,7 +4,7 @@
 
 Kurakani is a research-oriented Retrieval-Augmented Generation (RAG) project. The goal is not simply to build another chatbot, but to create a reproducible platform for studying **when to retrieve, how to retrieve, how to detect weak evidence, how to verify generated answers, and how to measure the quality/efficiency trade-offs of different RAG architectures**.
 
-**Status:** 🟡 Baseline implementation — deterministic chunking and BM25 retrieval are now in place.
+**Status:** 🟡 Retrieval baseline + evaluation layer — deterministic BM25, retrieval metrics, and an optional dense retriever adapter are implemented. No benchmark results are claimed yet.
 
 ## Research question
 
@@ -103,7 +103,7 @@ The project deliberately separates retrieval evaluation from generation evaluati
 
 ## Current implementation
 
-The first reproducible retrieval baseline lives under `src/kurakani/`. It intentionally uses a dependency-light BM25 implementation before introducing model-specific dense retrieval or generation. See `docs/BASELINE.md`.
+The first reproducible retrieval baseline lives under `src/kurakani/`. BM25 remains dependency-light; dense retrieval is available through an optional Sentence Transformers adapter. Retrieval metrics are implemented independently of generation. See `docs/BASELINE.md` and `docs/EVALUATION.md`.
 
 ## Research documentation
 
@@ -168,15 +168,17 @@ Every research branch should leave enough documentation for another researcher t
 - [x] Build deterministic ingestion/chunking foundation
 - [x] Implement deterministic BM25 retrieval baseline
 - [x] Add automated tests
-- [ ] Implement dense retrieval
+- [x] Implement dense retrieval adapter
 - [ ] Implement baseline generation
 - [ ] Add tracing
 
 ### Phase 2 — Retrieval
-- [ ] BM25/sparse retrieval
+- [x] BM25/sparse retrieval
+- [x] Retrieval evaluation metrics
+- [x] Pluggable dense retrieval adapter
+- [ ] Standardized retrieval benchmark dataset
 - [ ] Hybrid retrieval
 - [ ] Reranking
-- [ ] Retrieval evaluation dataset
 
 ### Phase 3 — Adaptive system
 - [ ] Query classification/features
@@ -192,7 +194,7 @@ Every research branch should leave enough documentation for another researcher t
 - [ ] Multi-hop benchmark
 
 ### Phase 5 — Evaluation
-- [ ] Automated evaluation harness
+- [x] Automated retrieval evaluation harness
 - [ ] Human evaluation protocol
 - [ ] Error taxonomy
 - [ ] Ablation framework
